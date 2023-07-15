@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Eva Play</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap stylesheet  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- Select2 stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    <!-- Local stylesheets  -->
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+    <div id="main">
+        <div class="nav-main">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg ">
+                    <a class="navbar-brand" href="{{ url_for('index') }}"><img alt="" class="img-fluid"
+                            src="../static/images/header-logo.png" style="height: 45px;" width="170px"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('index') }}"><i class="fa fa-home">
+                                        &nbsp;</i>Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/recommendations"><i class="fa fa-fire">
+                                        &nbsp;</i>Top Movies</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    More
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/contactus">Contact us</a>
+                                    <a class="dropdown-item" href="/aboutus">About us</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="right-container">
+                            <select id="movieSelect" class="select2 form-control" onchange="movieSelect()"
+                                style="width: 205px;">
+                                <option disabled hidden selected value="sm" id="search-movie">Search Movie</option>
+                                {% for name, year in movie_data %}
+                                <option value="{{ name }}" data-year="{{ year }}">{{ name }} ({{ year }})</option>
+                                {% endfor %}
+                            </select>
+                            <i class="fa fa-search"></i>
+                            <a href="/logout" class="logout-icon" data-toggle="tooltip" title="Logout">
+                                <img src="https://www.hotstar.com/assets/c724e71754181298e3f835e46ade0517.svg"
+                                    alt="User logout" width="30px">
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Top overall popular Recommend for you section -->
+        <div class="carousel-container">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="slider">
+                            <div class="slider-content">
+                                <div>
+                                    <h1 class="movie-title">{{p_movies[0]}}</h1>
+                                    <span class="badge bg-warning text-dark">TOP</span>
+                                    <p class="movie-des">{{date[0]}}</p>
+                                    <p class="movie-des">{{des[0]}}</p>
+                                </div>
+                            </div>
+                            <img src={{p_posters[0]}} alt="">
+                        </div>
+                    </div>
+
+                    {%for i in range(1, 5)%}
+                    <div class="carousel-item">
+                        <div class="slider">
+                            <div class="slider-content">
+                                <div>
+                                    <h1 class="movie-title">{{p_movies[i]}}</h1>
+                                    <span class="badge bg-warning text-dark">TOP</span>
+                                    <p class="movie-des">{{date[i]}}</p>
+                                    <p class="movie-des">{{des[i]}}</p>
+                                </div>
+                            </div>
+                            <img src={{p_posters[i]}} alt="">
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+
+        <!--  Based on Section -->
+        <!--  Popular Genres -->
+        <div class="container-fluidx mb-3">
+            <div class="in">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 class="block-title">Popular Genres</h2>
+                    </div>
+                </div>
+                <div>
+                    <input type="radio" name="genre" id="action" checked>
+                    <input type="radio" name="genre" id="comedy">
+                    <input type="radio" name="genre" id="drama">
+                    <input type="radio" name="genre" id="animation">
+                    <input type="radio" name="genre" id="war">
+                    <div class="navy">
+                        <div class="slider"></div>
+                        <label class="action" for="action" onclick="genreSelected('Action')">Action</label>
+                        <label class="comedy" for="comedy" onclick="genreSelected('Comedy')">Comedy</label>
+                        <label class="drama" for="drama" onclick="genreSelected('Animation')">Animation</label>
+                    </div>
+                </div>
+                <!-- cards -->
+                <div class="container-fluidx">
+                    <div class="row" id="genre-row">
+                        {%for i in range(0, 6)%}
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-2">
+                            <div class="video-block">
+                                <div class="video-thumb position-relative thumb-overlay">
+                                    <img class="img-fluid" src={{genre_posters[i]}} alt="">
+                                </div>
+                                <div class="video-content">
+                                    <h2 class="video-title"><a
+                                            href="/movie/{{genre_movies[i]}}/{{rec_year[i]}}">{{genre_movies[i]}}</a>
+                                    </h2>
+                                </div>
+                                <span class="video-year">{{rec_year[i]}}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <!--Best Years  -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p></p>
+                        <h2 class="block-title">Best Years</h2>
+                    </div>
+                </div>
+                <div>
+                    <input type="radio" name="year" id="r2022" checked>
+                    <input type="radio" name="year" id="r2021">
+                    <input type="radio" name="year" id="r2011">
+                    <input type="radio" name="year" id="r2009">
+                    <input type="radio" name="year" id="r2007">
+                    <div class="navx">
+                        <div class="slider"></div>
+                        <label class="r2022" for="r2022" onclick="yearSelected('2022')">2022</label>
+                        <label class="r2021" for="r2021" onclick="yearSelected('2021')">2021</label>
+                        <label class="r2011" for="r2011" onclick="yearSelected('2011')">2011</label>
+                    </div>
+                </div>
+                <!-- cards -->
+                <div class="container-fluidx">
+                    <div class="row" id="year-row">
+                        {%for i in range(0, 6)%}
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-2">
+                            <div class="video-block">
+                                <div class="video-thumb position-relative thumb-overlay">
+                                    <img class="img-fluid" src={{year_posters[i]}} alt="">
+                                </div>
+                                <div class="video-content">
+                                    <h2 class="video-title"><a
+                                            href="/movie/{{year_movies[i]}}/{{rec_yeard[i]}}">{{year_movies[i]}}</a>
+                                    </h2>
+                                </div>
+                                <span class="video-year">{{rec_yeard[i]}}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <div class="container-fluid footer" style="margin-top: 50px;">
+        <h6 class="text-center"> &#169; 2023 Movie - Designed and Developed by Hamza , Fasih and Sohaib </h6>
+    </div>
+
+    <!-- JS/jQuery files  -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <!-- Select 2 script -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <!-- Local JS files  -->
+    <script src="../static/js/script.js"></script>
+</body>
+
+</html>

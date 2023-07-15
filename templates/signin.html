@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign in</title>
+  <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+  <section class="house">
+    <div class="login-wrapper">
+      <div class="img-wrapper">
+        <a href="{{ url_for('index') }}"><img src="../static/images/header-logo.png" title="Home"></a>
+      </div>
+      <div class=" hybrid-login-form">
+        <div class="form-wrapper">
+          <h2 class="form-title">
+            Log in with your email
+          </h2>
+          <form action="/signin" method="post">
+            <input placeholder="Email" type="email" class="form-control" name="email" required>
+            <input placeholder="Password" type="password" class="form-control" name="password" required>
+            <button>CONTINUE</button>
+          </form>
+          <span class="form-register">
+            New to Stream?
+            <a href="/signup" style="color: #ff0000;"> Sign Up </a><br>
+            Don't Remember?
+            <a href="/forget" style="color: #ff0000;"> Forget </a>
+          </span>
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          <div class=" alert alert-danger" style="color: #ff0000;">
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+          </div>
+          {% endif %}
+          {% endwith %}
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

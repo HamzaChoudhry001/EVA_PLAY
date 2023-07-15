@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eva Play</title>
+    <!-- Bootstrap stylesheet  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- Select2 stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    <!-- Local stylesheets  -->
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+    <div class="main" id="main">
+        <div class="sub-header">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-sm-12">
+                        <nav aria-label="breadcrumb" class="text-center breadcrumb-nav">
+                            <h2 class="Page-title">About Us</h2>
+                            <ol class="breadcrumb">
+                                <li>
+                                    <i class="fa fa-home"></i>
+                                    <a href="{{ url_for('index') }}">Home</a>
+                                    <i class="fa fa-angle-right"></i>
+                                </li>
+                                <li>
+                                    <i class="fa fa-fire"></i>
+                                    <a href="/recommendations">Top</a>
+                                    <i class="fa fa-angle-right"></i>
+                                </li>
+                                <li>
+                                    <i class="fa fa-envelope"></i>
+                                    <a href="/contactus">Reach Out</a>
+                                    <i class="fa fa-angle-right"></i>
+                                </li>
+                                <li>
+                                    <i class="fa fa-info"></i>
+                                    <a href="/aboutus">About Us</a>
+                                    <i class="fa fa-angle-right"></i>
+                                </li>
+                                <li>
+                                    <i class="fa fa-sign-out"></i>
+                                    <a href="/logout">Log Out</a>
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Sub Header Section End -->
+
+
+        <!-- Start Main Content -->
+        <div class="main-content">
+            <!-- Start Our Statistics Section -->
+            <section class="statistics">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h2 class="block-title">Our Statistics</h2>
+                        </div>
+                        <!-- Col End -->
+                    </div>
+                    <!-- Row End -->
+                    <div class="row">
+                        <div class="col-6 col-xl mb-5 mb-xl-0">
+                            <div class="icon-box text-center">
+                                <div class="icon"><i class="fa fa-video-camera" aria-hidden="true"></i></div>
+                                <div class="number count1" data-from="10" data-to="9300" data-time="1000">
+                                    {{total_movies}}</div>
+                                <p>Movies</p>
+                            </div>
+                            <!-- Icon Box End -->
+                        </div>
+                        <!-- Col End -->
+                        <div class="col-6 col-xl mb-5 mb-xl-0">
+                            <div class="icon-box text-center">
+                                <div class="icon"><i class="fa fa-eye" aria-hidden="true"></i></div>
+                                <div class="number count2" data-from="10" data-to="7400" data-time="1000">55</div>
+                                <p>Shows</p>
+                            </div>
+                            <!-- Icon Box End -->
+                        </div>
+                        <!-- Col End -->
+                        <div class="col-6 col-xl mb-5 mb-xl-0">
+                            <div class="icon-box text-center">
+                                <div class="icon"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                <div class="number count3" data-from="10" data-to="1500" data-time="1000">
+                                    {{total_users}}</div>
+                                <p>Members</p>
+                            </div>
+                            <!-- Icon Box End -->
+                        </div>
+                        <!-- Col End -->
+
+                        <!-- Col End -->
+                    </div>
+                    <!-- Row end -->
+                </div>
+                <!-- Container end -->
+            </section>
+
+            <!-- Our Statistics Section End -->
+            <div class="gap-50"></div>
+            <!-- Start Subscribe Section -->
+            <section class="subscribe section-parallax">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img class="img-fluid mb-4" src="../static/images/about/07.jpg" alt="">
+                        </div>
+                        <div class="col-md-6">
+                            <h2 class="mb-4">And If You
+                                Join the Experience?</h2>
+                            <p class="mb-4">True friendship is possibly the only relationship that endures the test of
+                                time and remains unconditional. Perhaps the ultimate definition of friendship is a
+                                unique blend of devotion, loyalty, love, respect, trust, and a lot of fun. Friends share
+                                common interests, mutual respect, and a strong devotion to one another. These are only
+                                some of the general characteristics of a friendship. To understand what friendship is,
+                                one must have true friends who are a unique treasure.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="gap-50"></div>
+            <!-- Start Our Team Section -->
+            <section class="our-team">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h2 class="block-title">Our Team</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-xl mb-5 mb-xl-0">
+                            <div class="card team-box">
+                                <div class="team-box-img">
+                                    <img src="../static/images/about/04.jpg" class="img-fluid img-zoom" alt="">
+                                </div>
+                                <div class="card-body">
+                                    <h2 class="card-title team-box-name">Bilal Tariq</h2>
+                                    <span>Supervisor</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-xl mb-5 mb-xl-0">
+                            <div class="card team-box">
+                                <div class="team-box-img">
+                                    <img src="../static/images/about/02.jpg" class="img-fluid img-zoom" alt="">
+                                </div>
+                                <div class="card-body">
+                                    <h2 class="card-title team-box-name">Hamza</h2>
+                                    <span>Developer</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-xl mb-5 mb-xl-0">
+                            <div class="card team-box">
+                                <div class="team-box-img">
+                                    <img src="../static/images/about/01.jpg" class="img-fluid img-zoom" alt="">
+                                </div>
+                                <div class="card-body">
+                                    <h2 class="card-title team-box-name">Fasih</h2>
+                                    <span>Designer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-xl mb-5 mb-xl-0">
+                            <div class="card team-box">
+                                <div class="team-box-img">
+                                    <img src="../static/images/about/03.jpg" class="img-fluid img-zoom" alt="">
+                                </div>
+                                <div class="card-body">
+                                    <h2 class="card-title team-box-name">Sohaib</h2>
+                                    <span>Developer</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+            <!-- Our Team Section End -->
+        </div>
+    </div>
+    <!-- Footer -->
+    <div class="container-fluid footer" style="margin-top: 50px;">
+        <h6 class="text-center"> &#169; 2023 Movie - Designed and Developed by Hamza , Fasih and Sohaib </h6>
+    </div>
+</body>
+
+</html>

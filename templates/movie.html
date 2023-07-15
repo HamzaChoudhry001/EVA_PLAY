@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eva Play</title>
+    <!-- Bootstrap stylesheet  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- Select2 stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    <!-- Local stylesheets  -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div id="main">
+        <div class="nav-main">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg ">
+                    <a class="navbar-brand" href="{{ url_for('index') }}"><img alt="" class="img-fluid"
+                            src="/static/images/header-logo.png" style="height: 45px;" width="170px"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('index') }}"><i class="fa fa-home">
+                                        &nbsp;</i>Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/recommendations"><i class="fa fa-fire">
+                                        &nbsp;</i>Top Movies</a>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    More
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ url_for('contactus') }}">Contact us</a>
+                                    <a class="dropdown-item" href="{{ url_for('aboutus') }}">About us</a>
+
+                                </div>
+                            </li>
+
+                        </ul>
+                        <div class="right-container">
+                            <select id="movieSelect" class="select2 form-control" onchange="movieSelect()"
+                                style="width: 205px;">
+                                <option disabled hidden selected value="sm" id="search-movie">Search Movie</option>
+                                <!-- {% for item in movie_data %}
+                                <option value="{{ item[0] }}" data-year="{{ item[1] }}">{{ item[0] }} &nbsp; {{ item[1] }}</option>
+                            {% endfor %} -->
+                                {% for name, year in movie_data %}
+                                <option value="{{ name }}" data-year="{{ year }}">{{ name }} ({{ year }})</option>
+                                {% endfor %}
+                            </select>
+
+                            <i class="fa fa-search"></i>
+                            <a href="/logout" class="logout-icon" data-toggle="tooltip" title="Logout">
+                                <img src="https://www.hotstar.com/assets/c724e71754181298e3f835e46ade0517.svg"
+                                    alt="User logout" width="30px">
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Start Play Details Section -->
+        <section class="play-details">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <img class="img-fluid" src="{{movie_poster}}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="play-details-content">
+                            <div class="title-block d-flex align-items-center justify-content-between">
+                                <h2 class="play-title">{{movie_name}}</h2>
+                            </div>
+                            <!-- Title Block -->
+                            <div class="details-info mb-4">
+                                {% if year: %}
+                                <span><i class="fa fa-calendar">&nbsp;&nbsp;</i>{{year}}</span>
+                                {% endif %}
+                                <span>
+                                    <i class="fa fa-smile-o"></i>
+                                    {% for item in mov_genre[movie_idx][:3] %}
+                                    &nbsp;{{item}}
+                                    {% endfor %}
+                                </span>
+                            </div>
+
+                            <div class="tag">
+                                {% if tagline: %}
+                                <p>{{tagline}}</p>
+                                {% endif %}
+                            </div>
+                            <!-- Details Info -->
+                            <div class="details-desc">
+                                {% if over: %}
+                                <p>{{over}}</p>
+                                {% endif %}
+                            </div>
+
+                            <!-- Person Block -->
+                            <div class="person-block">
+                                <h5 class="title">Cast</h5>
+                                <p>{% for item in mov_cast[movie_idx] %}
+                                    {{item}} ,
+                                    {% endfor %}
+                                </p>
+                            </div>
+                            <div class="trail"><span class="watch-movie">
+                                    <i class="fa fa-film" aria-hidden="true"> </i>
+                                    Trailer
+                                </span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Trailer Pop-up -->
+        <div class="trailer" style="visibility: hidden; opacity: 0;">
+            <!-- <div class="row watch-name">
+            <h3>{{movie_name}}</h3>
+        </div> -->
+            <span class="close">&times;</span>
+            <iframe width="60%" height="80%"
+                src="https://www.youtube.com/embed/{{trailer_key}}?autoplay=0&showinfo=0&controls=0&mute=1&playlist={{trailer_key}}&loop=1"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
+        <!-- Recommended Movies -->
+        <div class="in">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="block-title">Recommended Movies</h2>
+                </div>
+            </div>
+            <div class="row" id="genre-row">
+                {%for i in range(1, 7)%}
+                <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-2">
+                    <div class="video-block">
+                        <div class="video-thumb position-relative thumb-overlay">
+                            <a href="/movie/{{recommend_title[i]}}"><img class="img-fluid" src={{recommend_poster[i]}}
+                                    alt=""></a>
+                        </div>
+                        <div class="video-content">
+                            <h2 class="video-title"><a
+                                    href="/movie/{{recommend_title[i]}}/{{rec_year[i]}}">{{recommend_title[i]}}</a></h2>
+                        </div>
+                        <span class="video-year">{{rec_year[i]}}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <div class="container-fluid footer" style="margin-top: 50px;">
+        <h6 class="text-center"> &#169; 2023 Movie - Designed and Developed by Hamza , Fasih and Sohaib </h6>
+    </div>
+    <!-- JS/jQuery files  -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <!-- Select 2 script -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <!-- Local JS files  -->
+    <script src="/static/js/script.js"></script>
+</body>
+
+</html>

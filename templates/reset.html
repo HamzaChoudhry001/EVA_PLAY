@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reset Password</title>
+  <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+  <section class="house">
+    <div class="login-wrapper">
+      <div class="img-wrapper">
+        <img src="../static/images/header-logo.png"" alt="" >
+      </div>
+      <div class=" hybrid-login-form">
+        <div class="form-wrapper">
+          <h2 class="form-title">
+            Change Password
+          </h2>
+          <h3>{{e}}</h3>
+          <form action="/reset" method="post">
+            <input placeholder="New Password" type="password" class="form-control" name="password1" required>
+            <input placeholder="Confirm Password" type="password" class="form-control" name="password2" required>
+            <button>CONTINUE</button>
+          </form>
+          <span class="form-register">
+            Want to Signin?
+            <a href="/signin" style="color: #ff0000;"> Sign In </a><br>
+          </span>
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          <div class=" alert alert-danger" style="color: #ff0000;">
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+          </div>
+          {% endif %}
+          {% endwith %}
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin</title>
+  <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+
+
+  <section class="house">
+    <div class="login-wrapper">
+      <div class="img-wrapper">
+        <img src="../static/images/header-logo.png"" alt="">
+      </div>
+      <div class=" hybrid-login-form">
+        <div class="form-wrapper">
+          <h3 class="form-title">
+            New Movies
+            <a href="/logout" class="logout-icon" data-toggle="tooltip" title="Logout" style="padding-left: 60px;">
+              <img src="https://www.hotstar.com/assets/c724e71754181298e3f835e46ade0517.svg" alt="User logout"
+                width="30px">
+            </a>
+          </h3>
+
+          <form action="/admin" method="post" id="movieForm">
+            <input placeholder="Enter Full Movie Name" type="text" class="form-control" name="text" required>
+            <input placeholder="Year" type="tel" class="form-control" name="year" required>
+            <!-- <p>Wait 5 to 10 minutes </p> -->
+            <button>CONTINUE</button>
+          </form>
+
+          <form action="/update-popularity" method="post">
+            <input placeholder="Year" type="tel" class="form-control" name="year1" required>
+            <input placeholder="Year" type="tel" class="form-control" name="year2" required>
+            <button type="submit">Update Popularity</button>
+          </form>
+
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          <div style="color: #ff0000;">
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+          </div>
+          {% endif %}
+          {% endwith %}
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>

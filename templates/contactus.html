@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <!-- Bootstrap stylesheet  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Local stylesheets  -->
+    <link rel="stylesheet" href="../static/css/style.css">
+
+    <style>
+        .house {
+            background: rgba(23, 22, 22, 0.84);
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="sub-header">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-sm-12">
+                        <nav aria-label="breadcrumb" class="text-center breadcrumb-nav">
+                            <h2 class="Page-title">Contact Us</h2>
+                            <ol class="breadcrumb">
+                                <li>
+                                    <i class="fa fa-home"></i>
+                                    <a href="{{ url_for('index') }}">Home</a>
+                                    <i class="fa fa-angle-right"></i>
+                                </li>
+                                <li>
+                                    <i class="fa fa-fire"></i>
+                                    <a href="/recommendations">Top</a>
+                                    <i class="fa fa-angle-right"></i>
+                                </li>
+                                <li>
+                                    <i class="fa fa-envelope"></i>
+                                    <a href="/contactus">Reach Out</a>
+                                    <i class="fa fa-angle-right"></i>
+                                </li>
+                                <li>
+                                    <i class="fa fa-info"></i>
+                                    <a href="/aboutus">About Us</a>
+                                    <i class="fa fa-angle-right"></i>
+                                </li>
+                                <li>
+                                    <i class="fa fa-sign-out"></i>
+                                    <a href="/logout">Log Out</a>
+
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="house">
+            <div class="login-wrapper">
+                <div class="hybrid-login-form">
+                    <div class="form-wrapper">
+                        <h2 class="form-title">
+                            Contact us
+                        </h2>
+
+                        <form action="/contactus" method="post">
+                            <input placeholder="Name" type="text" class="form-control"
+                                style="background-color: #31343e; color: #fff;" name="name" required>
+                            <input placeholder="Email" type="email" class="form-control"
+                                style="background-color: #31343e; color: #fff;" name="email" required>
+                            <textarea name="message" class="form-control"
+                                style="background-color: #31343e; color: #fff;" placeholder="Your message"></textarea>
+                            <button>SEND</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <div class="container-fluid footer">
+            <h6 class="text-center"> &#169; 2023 Movie - Designed and Developed by Hamza , Fasih and Sohaib </h6>
+        </div>
+    </div>
+</body>
+</html>
